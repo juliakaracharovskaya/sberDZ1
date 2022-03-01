@@ -1,0 +1,31 @@
+<h1>Main page</h1>
+
+
+
+<div class="d-flex justify-content-center">
+    <form class="d-flex flex-column align-items-center" action="/addressbook" method="POST">
+        <div class="mb-3">
+            <input name="picture" placeholder="Ссылка на фото" type="text"
+                class="form-control p-2 text-center rounded-pill border border-danger shadow p-1 mb-0.5 bg-body rounded">
+        </div>
+        <div class="mb-3">
+            <input name="name" placeholder="Описание" type="text"
+                class="form-control  p-2 text-center rounded-pill border border-danger shadow p-1 mb-0.5 bg-body rounded">
+        </div>
+        <button type="submit" class="btn btn-dark">Загрузить</button>
+    </form>
+</div>
+
+<hr />
+
+<section class="d-flex flex-column align-items-center">
+    {{#each listOfPeople}}
+    <div class="card my-2 " style="width: 18rem;">
+        <img src="{{this.picture}}" class="card-img-top shadow-lg p-3 mb-5 bg-body rounded">
+        <div class="card-body">
+            <p class="card-text">{{this.name}}</p>
+        </div>
+    </div>
+    {{/each}}
+
+</section>
