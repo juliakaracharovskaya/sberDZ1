@@ -1,6 +1,4 @@
-<h1>Main page</h1>
-
-
+<h1 class="fst-normal text-danger">Main page</h1>
 
 <div class="d-flex justify-content-center">
     <form class="d-flex flex-column align-items-center" action="/addressbook" method="POST">
@@ -18,13 +16,16 @@
 
 <hr />
 
-<section class="d-flex flex-column align-items-center">
+<section data-cart class="d-flex flex-column align-items-center">
     {{#each listOfPeople}}
     <div class="card my-2 " style="width: 18rem;">
-        <img src="{{this.picture}}" class="card-img-top shadow-lg p-3 mb-5 bg-body rounded">
+        <img data-id="{{this.imageId}}" src="{{this.picture}}" class="card-img-top shadow-lg p-3 mb-5 bg-body rounded">
         <div class="card-body">
             <p class="card-text">{{this.name}}</p>
         </div>
+    </div>
+    <div>
+        <button data-action="delete" type="submit" class="btn btn-dark">Удалить</button>
     </div>
     {{/each}}
 

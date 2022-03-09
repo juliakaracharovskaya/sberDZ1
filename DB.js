@@ -9,6 +9,9 @@ const db = {
       name: 'Пенелопа Крус',
     },
   ],
+  users: [
+
+  ],
 }
 
 module.exports = {

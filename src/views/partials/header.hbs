@@ -1,0 +1,27 @@
+{{#if name}}
+hello,
+{{name}}
+{{/if}}
+
+<nav>
+    <ul>
+        <li>
+            <a href="/" class="text-danger">Main</a>
+        </li>
+        {{#if name}}
+        <li>
+            <a href="/auth/signout" class="text-danger">Sign out</a>
+        </li>
+        {{else}}
+
+        <li>
+            <a href="/auth/signup" class="text-danger">Sign Up</a>
+        </li>
+        <li>
+            <a href="/auth/signin" class="text-danger">Sign In</a>
+        </li>
+
+        {{/if}}
+
+    </ul>
+</nav>
