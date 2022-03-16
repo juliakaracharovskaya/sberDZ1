@@ -1,6 +1,5 @@
 const $signUpForm = document.forms.signupform
 const $cartWr = document.querySelector('[data-cart]')
-// const $fetchBtn = document.querySelector('[data-fetch]')
 
 if ($signUpForm) {
   console.log('work')
@@ -43,19 +42,18 @@ if ($signUpForm) {
 
 $cartWr.addEventListener('click', async (e) => {
   if (e.target.dataset.action) {
-    console.log(e.target)
+    const postId = e.target.closest('[data-post]').dataset.post
+
+    const response = await fetch('/post', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ postId }),
+    })
+
+    if (response.status === 200) {
+      e.target.closest('[data-post]').remove()
+    } else { alert('Удалять может только автор поста') }
   }
 })
-
-// if ($fetchBtn) {
-//   $fetchBtn.addEventListener('click', () => {
-//     fetch('/fetch/', {
-//       method: 'DELETE',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       body: JSON.stringify({ id: Date.now() }),
-//     })
-//       .then((response) => { console.log({ response }) })
-//   })
-// }

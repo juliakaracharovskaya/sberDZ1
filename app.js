@@ -4,6 +4,7 @@ const path = require('path')
 const hbs = require('hbs')
 const sessions = require('express-session')
 const { v4: uuidv4 } = require('uuid')
+const { timingSafeEqual, sign } = require('crypto')
 const { db } = require('./DB')
 const { checkAuth } = require('./src/middlewares/checkAuth')
 
@@ -59,10 +60,21 @@ server.get('/', checkAuth, (request, response) => {
   response.render('main', { listOfPeople: peopleForRender })
 })
 
-// server.delete('/fetch', (req, res) => {
-//   console.log('>>>>>>>>', req.body, req.session)
-//   res.sendStatus(204)
-// })
+server.delete('/post', (req, res) => {
+  const userId = req.session?.user?.id // айди автора в сессии
+  const { postId } = req.body // айди поста
+  const rightId = db.people.find((el) => Number(el.postNumber) === Number(postId))
+  if (rightId) {
+    if (userId === rightId.imageId) {
+      const newPeople = db.people.filter((el) => Number(el.postNumber) !== postId)
+      db.people = newPeople
+
+      return res.sendStatus(200)
+    }
+    return res.sendStatus(403)
+  }
+  return res.sendStatus(404)
+})
 
 server.get('/auth/signup', (req, res) => {
   res.render('signUp')
@@ -122,7 +134,9 @@ server.post('/addressbook', (req, res) => {
   const dataFromForm = req.body
 
   db.people.push(dataFromForm)
+
   dataFromForm.imageId = req.session.user.id
+  dataFromForm.postNumber = Date.now()
 
   res.redirect('/')
 })

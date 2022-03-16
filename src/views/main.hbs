@@ -18,15 +18,17 @@
 
 <section data-cart class="d-flex flex-column align-items-center">
     {{#each listOfPeople}}
-    <div class="card my-2 " style="width: 18rem;">
-        <img data-id="{{this.imageId}}" src="{{this.picture}}" class="card-img-top shadow-lg p-3 mb-5 bg-body rounded">
-        <div class="card-body">
-            <p class="card-text">{{this.name}}</p>
+    <div  data-id="{{this.imageId}}" data-post="{{this.postNumber}}">
+        <div class="card my-2 " style="width: 18rem;">
+            <img src="{{this.picture}}" class="card-img-top shadow-lg p-3 mb-5 bg-body rounded">
+            <div class="card-body">
+                <p class="card-text">{{this.name}}</p>
+                <button data-action="delete" type="submit" class="btn btn-dark">Удалить</button>
+            </div>
         </div>
+
     </div>
-    <div>
-        <button data-action="delete" type="submit" class="btn btn-dark">Удалить</button>
-    </div>
+
     {{/each}}
 
 </section>
